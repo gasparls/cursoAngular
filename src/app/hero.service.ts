@@ -12,10 +12,7 @@ export class HeroService {
   private heroesUrl = `api/heroes`;
 
   private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-       Autorization: localStorage.getItem('token')
-   }),
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
   constructor(
@@ -24,7 +21,7 @@ export class HeroService {
   ) {}
 
   getHeroes(): Observable<Hero[]> {
-    return this.http.get<Hero[]>(this.heroesUrl, this.httpOptions).pipe(
+    return this.http.get<Hero[]>(this.heroesUrl).pipe(
       tap(() => this.log('fetched heroes')),
       catchError(this.handleError<Hero[]>('getHeroes', []))
     );
